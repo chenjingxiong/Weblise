@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/chenjingxiong/weblise/server/protocol"
-	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
 )
 
@@ -35,7 +34,7 @@ func (s *Server) handleAgent(wsConn *websocket.Conn) {
 	baseConn := protocol.NewConnection(protocol.ConnectionTypeAgent, regMsg.Key)
 	conn := NewConnection(baseConn)
 
-	s.hub.RegisterAgentConnection(conn.Connection)
+	s.hub.RegisterAgentConnection(conn)
 
 	done := make(chan struct{})
 	go func() {
@@ -77,5 +76,5 @@ func (s *Server) handleAgent(wsConn *websocket.Conn) {
 	}
 
 	close(done)
-	s.hub.Unregister(conn.Connection)
+	s.hub.Unregister(conn)
 }

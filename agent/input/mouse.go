@@ -1,6 +1,6 @@
 package input
 
-import "github.com/go-vgo/robotgo"
+import "fmt"
 
 type Mouse struct{}
 
@@ -9,17 +9,18 @@ func NewMouse() *Mouse {
 }
 
 func (m *Mouse) Move(x, y int) error {
-	return robotgo.MoveMouse(x, y)
+	// TODO: Implement platform-specific mouse control
+	return fmt.Errorf("mouse control not implemented")
 }
 
 func (m *Mouse) Click(button string) error {
-	return robotgo.MouseClick(button)
+	return fmt.Errorf("mouse click not implemented")
 }
 
 func (m *Mouse) Press(button string) error {
-	return robotgo.MouseToggle("down", button)
+	return fmt.Errorf("mouse press not implemented")
 }
 
 func (m *Mouse) Release(button string) error {
-	return robotgo.MouseToggle("up", button)
+	return fmt.Errorf("mouse release not implemented")
 }

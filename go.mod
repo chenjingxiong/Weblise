@@ -3,12 +3,9 @@ module github.com/chenjingxiong/weblise
 go 1.21
 
 require (
-	github.com/gin-gonic/gin v1.9.1
+	github.com/google/uuid v1.5.0
 	github.com/gorilla/websocket v1.5.1
 	github.com/mattn/go-sqlite3 v1.14.18
-	github.com/kbinani/screenshot v0.0.0-20230601120736-8b421e4c6696
-	github.com/go-vgo/robotgo v0.0.0-20230830182337-9b5c1e6ab2f6
-	github.com/spf13/cobra v1.8.0
-	github.com/shirou/gopsutil/v3 v3.23.12
-	github.com/google/uuid v1.5.0
 )
+
+require golang.org/x/net v0.17.0 // indirect

@@ -13,9 +13,9 @@ func TestHub_RegisterAgentConnection(t *testing.T) {
 	defer hub.Stop()
 
 	conn := NewConnection(protocol.NewConnection(protocol.ConnectionTypeAgent, "test-agent-key"))
-	hub.RegisterAgentConnection(conn.Connection)
+	hub.RegisterAgentConnection(conn)
 
-	time.Sleep(50 * time.Millisecond) // Let the hub process
+	time.Sleep(50 * time.Millisecond)
 
 	agent := hub.GetAgentByKey("test-agent-key")
 	if agent == nil {
@@ -34,12 +34,12 @@ func TestHub_CreateSession(t *testing.T) {
 	agentConn := NewConnection(protocol.NewConnection(protocol.ConnectionTypeAgent, "agent-key"))
 	clientConn := NewConnection(protocol.NewConnection(protocol.ConnectionTypeClient, ""))
 
-	hub.RegisterAgentConnection(agentConn.Connection)
-	hub.RegisterClientConnection(clientConn.Connection)
+	hub.RegisterAgentConnection(agentConn)
+	hub.RegisterClientConnection(clientConn)
 
 	time.Sleep(50 * time.Millisecond)
 
-	session := hub.CreateSession("test-session", clientConn.Connection, agentConn.Connection)
+	session := hub.CreateSession("test-session", clientConn, agentConn)
 
 	if session == nil {
 		t.Fatal("Session not created")

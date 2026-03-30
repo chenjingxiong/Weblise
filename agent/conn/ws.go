@@ -2,8 +2,8 @@ package conn
 
 import (
 	"encoding/base64"
-	"encoding/json"
 	"log"
+	"runtime"
 	"sync"
 	"time"
 
@@ -11,7 +11,6 @@ import (
 	"github.com/chenjingxiong/weblise/agent/input"
 	"github.com/chenjingxiong/weblise/agent/screen"
 	"github.com/gorilla/websocket"
-	"github.com/shirou/gopsutil/v3/host"
 )
 
 type Connection struct {
@@ -229,6 +228,5 @@ func getButtonName(button int) string {
 }
 
 func getOSType() string {
-	platform, _, _, _ := host.PlatformInformation()
-	return platform
+	return runtime.GOOS
 }

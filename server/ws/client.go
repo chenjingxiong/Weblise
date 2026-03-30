@@ -2,7 +2,6 @@ package ws
 
 import (
 	"encoding/json"
-	"log"
 	"time"
 
 	"github.com/chenjingxiong/weblise/server/protocol"
@@ -16,7 +15,7 @@ func (s *Server) handleClient(wsConn *websocket.Conn) {
 	baseConn := protocol.NewConnection(protocol.ConnectionTypeClient, "")
 	conn := NewConnection(baseConn)
 
-	s.hub.RegisterClientConnection(conn.Connection)
+	s.hub.RegisterClientConnection(conn)
 
 	done := make(chan struct{})
 	go func() {
@@ -63,7 +62,7 @@ func (s *Server) handleClient(wsConn *websocket.Conn) {
 			}
 
 			sessionID := uuid.New().String()
-			s.hub.CreateSession(sessionID, conn.Connection, agentConn)
+			s.hub.CreateSession(sessionID, conn, agentConn)
 			conn.SendSafe(&protocol.Message{Type: protocol.MessageTypeConnect})
 
 		case protocol.MessageTypeHeartbeat:
@@ -75,5 +74,5 @@ func (s *Server) handleClient(wsConn *websocket.Conn) {
 	}
 
 	close(done)
-	s.hub.Unregister(conn.Connection)
+	s.hub.Unregister(conn)
 }

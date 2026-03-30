@@ -1,6 +1,6 @@
 package input
 
-import "github.com/go-vgo/robotgo"
+import "fmt"
 
 type Keyboard struct{}
 
@@ -9,9 +9,9 @@ func NewKeyboard() *Keyboard {
 }
 
 func (k *Keyboard) Press(key string) error {
-	return robotgo.KeyTap(key)
+	return fmt.Errorf("keyboard control not implemented")
 }
 
 func (k *Keyboard) Type(text string) error {
-	return robotgo.TypeStr(text)
+	return fmt.Errorf("keyboard type not implemented")
 }

@@ -1,8 +1,8 @@
 package screen
 
 import (
+	"fmt"
 	"image"
-	"time"
 )
 
 type Capturer interface {
@@ -26,12 +26,19 @@ func New(cfg *Config) (Capturer, error) {
 	if cfg == nil {
 		cfg = DefaultConfig()
 	}
-	return newCapturer(cfg)
+	return &mockCapturer{}, nil
 }
 
-type Frame struct {
-	Data      []byte
-	Width     int
-	Height    int
-	Timestamp time.Time
+type mockCapturer struct{}
+
+func (m *mockCapturer) Capture() (*image.RGBA, error) {
+	return nil, fmt.Errorf("screen capture not implemented - requires platform-specific libraries")
+}
+
+func (m *mockCapturer) Bounds() (int, int) {
+	return 1920, 1080
+}
+
+func EncodeJPEG(img *image.RGBA, quality int) ([]byte, error) {
+	return nil, fmt.Errorf("JPEG encoding not implemented")
 }
