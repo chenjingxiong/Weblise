@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  weblise-server:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: weblise-server
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - HTTP_PORT=8080
+      - WS_PORT=8443
+      - DB_PATH=/app/data/weblise.db
+    restart: unless-stopped
